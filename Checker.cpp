@@ -3,22 +3,16 @@
 using namespace std;
 
 bool batteryIsOk(float temperature, float soc, float chargeRate) {
-  bool temperatureOk = (temperature >= 0 && temperature <= 45);
-  bool socOk = (soc >= 20 && soc <= 80);
-  bool chargeRateOk = (chargeRate <= 0.8);
-  
-  if (!temperatureOk || !socOk || !chargeRateOk) {
-    if (!temperatureOk) {
-      cout << "Temperature out of range!\n";
-    }
-    if (!socOk) {
-      cout << "State of Charge out of range!\n";
-    }
-    if (!chargeRateOk) {
-      cout << "Charge Rate out of range!\n";
-    }
+  if (temperature < 0 || temperature > 45 || soc < 20 || soc > 80) {
+    cout << "Temperature or State of Charge out of range!\n";
     return false;
   }
+  
+  if (chargeRate > 0.8) {
+    cout << "Charge Rate out of range!\n";
+    return false;
+  }
+  
   return true;
 }
 
